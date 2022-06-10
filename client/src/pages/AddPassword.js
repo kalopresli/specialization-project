@@ -26,7 +26,7 @@ function AddPasswordPage() {
 
             <div className="AddingPassword">
                 <p>
-                    Create a new password
+                    Add a password
                 </p>
                 <input
                     type="text"
