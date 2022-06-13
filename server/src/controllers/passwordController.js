@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import mysql from 'mysql';
+import createPassword, { allPasswords, saveGenPass, savePersPass } from "../services/passwordManagement.js";
+import generatePin from "../services/pinManagement.js";
 
 const db = mysql.createConnection({
     user: 'root',
@@ -11,7 +13,6 @@ const db = mysql.createConnection({
 
 const router = express.Router();
 router.use(express.json())
-import createPassword, { allPasswords, saveGenPass, savePersPass } from "../services/passwordManagement.js";
 var jsonParser = bodyParser.json();
 
 
@@ -60,6 +61,7 @@ router.get('/', async (req, res) => {
         res.send(result)
     })
     //res.send(allPasswords())
+    //generatePin(6, 'pc')
 })
 
 //module.exports = router;
