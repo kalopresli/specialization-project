@@ -6,10 +6,11 @@ function AddPasswordPage() {
     const [location, setlocation] = useState("");
     const [passwordList, setPasswordList] = useState([]);
     const [length, setlength] = useState();
+    const [username, setusername] = useState();
+
 
     useEffect(() => {
         Axios.get("http://localhost:4040/password/").then((response) => {
-            console.log(JSON.stringify(response.data));
         });
     }, []);
 
@@ -17,6 +18,7 @@ function AddPasswordPage() {
         const response = await Axios.post("http://localhost:4040/password/savepers", {
             password: password,
             location: location,
+            username: username
         }, { headers: { 'content-type': 'application/json' } });
         console.log(response);
     };
@@ -33,6 +35,13 @@ function AddPasswordPage() {
                     placeholder="Type your password"
                     onChange={(event) => {
                         setPassword(event.target.value);
+                    }}
+                />
+                <input
+                    type="text"
+                    placeholder="Username"
+                    onChange={(event) => {
+                        setusername(event.target.value);
                     }}
                 />
                 <input

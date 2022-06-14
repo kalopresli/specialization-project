@@ -18,12 +18,13 @@ var jsonParser = bodyParser.json();
 
 router.post('/create', async (req, res) => {
     //let location =  req.body.password;
-    const { length, location } = req.body
+    const { length, location, username } = req.body
     const newPass = await createPassword(
         length,
         true,
         true,
-        location
+        location,
+        username
     )
     //console.log(req.body.length);
     res.send(newPass);
@@ -31,25 +32,27 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/savepers', async(req, res) => {
-    const {password, location} = req.body;
+    const {password, location, username} = req.body;
     const savePass = await savePersPass(
         password,
-        location
+        location,
+        username
     )
     res.send(savePass)
 })
 
 router.post('/save', async (req, res) => {
     //let location =  req.body.password;
-    const { length, location } = req.body;
+    const { length, location, username } = req.body;
     const savePass = await saveGenPass(
         length,
         true,
         true,
-        location
+        location,
+        username
     )
 
-    console.log(req.body.length);
+    console.log(req.body.username);
     res.send(savePass);
     //res.end(); 
 });

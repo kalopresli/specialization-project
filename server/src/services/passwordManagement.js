@@ -19,10 +19,9 @@ const numbers = '0123456789'
 const symbols = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-//import passwordsFile from '../passwords.json' assert {type: 'json'};
 
 
-export default function createPassword(length, hasNumbers = true, hasSymbols = true, location) {
+export default function createPassword(length, hasNumbers = true, hasSymbols = true, location, username) {
     let chars = alpha
     hasNumbers ? (chars += numbers) : ''
     hasSymbols ? (chars += symbols) : ''
@@ -31,14 +30,15 @@ export default function createPassword(length, hasNumbers = true, hasSymbols = t
     }
     else passDict.Location = location;*/
     //console.log(passDict.Location);
-    return generatePassword(length, chars, location)
+    return generatePassword(length, chars, location, username)
 }
 
-const generatePassword = async (length, chars, location) => {
+const generatePassword = async (length, chars, location, username) => {
     let password = '';
     let passDict = {
         Location: location,
-        Password: password
+        Password: password,
+        Username: username
     }
     for (let i = 0; i < length; i++) {
         password += chars.charAt(Math.floor(Math.random() * chars.length))
@@ -53,31 +53,33 @@ const generatePassword = async (length, chars, location) => {
     return passDict;
 }
 
-export const savePersPass = async (password, location) => {
+export const savePersPass = async (password, location, username) => {
     let Password = {
         password,
-        location
+        location,
+        username
     }
-    db.query("INSERT INTO passwords (password, location) VALUES (?,?)", 
-    [Password.password, Password.location],
+    db.query("INSERT INTO passwords (password, location, username) VALUES (?,?,?)", 
+    [Password.password, Password.location, Password.username],
     (err, res) => {
         if (err) {console.log(err);}
         else {console.log(password.Location);};
     });
 }
 
-export const saveGenPass = async (length, hasNumbers = true, hasSymbols = true, location) => {
+export const saveGenPass = async (length, hasNumbers = true, hasSymbols = true, location, username) => {
     let password = await createPassword(
         length,
         hasNumbers,
         hasSymbols,
-        location
+        location,
+        username
     )
-    db.query("INSERT INTO passwords (password, location) VALUES (?,?)", 
-    [password.Password, password.Location],
+    db.query("INSERT INTO passwords (password, location, username) VALUES (?,?,?)", 
+    [password.Password, password.Location, password.Username],
     (err, res) => {
         if (err) {console.log(err);}
-        else {console.log(password.Password);};
+        else {console.log(password.Username);};
     });
     // const salt = bcrypt.genSalt();
     //const hashedPassword = bcrypt.hash(password.Password, parseInt(salt));

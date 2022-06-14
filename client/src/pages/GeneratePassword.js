@@ -1,11 +1,15 @@
 import "./passwordManagerPage.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import Popup from "../components/Popup";
+
 function PasswordManagerPage() {
     const [password, setPassword] = useState("");
     const [location, setlocation] = useState("");
     const [passwordList, setPasswordList] = useState([]);
     const [length, setlength] = useState();
+    const [username, setusername] = useState();
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     useEffect(() => {
         Axios.get("http://localhost:4040/password/").then((response) => {
@@ -17,8 +21,19 @@ function PasswordManagerPage() {
         const response = await Axios.post("http://localhost:4040/password/save", {
             length: length,
             location: location,
+            username: username
+        }, { headers: { 'content-type': 'application/json' } });
+
+    };
+
+    const generatePass = async () => {
+        const response = await Axios.post("http://localhost:4040/password/create", {
+            length: length,
+            location: location,
+            username: username
         }, { headers: { 'content-type': 'application/json' } });
         console.log(response);
+        setPassword(response.data.Password);
     };
 
     const addPersPassword = async () => {
@@ -29,25 +44,6 @@ function PasswordManagerPage() {
         console.log(response);
     };
 
-    const decryptPassword = (encryption) => {
-        Axios.post("http://localhost:3001/decryptpassword", {
-            password: encryption.password,
-            iv: encryption.iv,
-        }).then((response) => {
-            setPasswordList(
-                passwordList.map((val) => {
-                    return val.id === encryption.id
-                        ? {
-                            id: val.id,
-                            password: val.password,
-                            location: response.data,
-                            iv: val.iv,
-                        }
-                        : val;
-                })
-            );
-        });
-    };
 
     return (
         <div className="App">
@@ -65,13 +61,30 @@ function PasswordManagerPage() {
                 />
                 <input
                     type="text"
+                    placeholder="Username"
+                    onChange={(event) => {
+                        setusername(event.target.value);
+                    }}
+                />
+                <input
+                    type="text"
                     placeholder="Website"
                     onChange={(event) => {
                         setlocation(event.target.value);
                     }}
                 />
-                <button onClick={addGenPass}> Add Password</button>
+                <button onClick={addGenPass}> Save Password</button>
+                <button onClick={() => {
+                    generatePass();
+                    setButtonPopup(true);
+                }}>
+                    Generate Password</button>
+
             </div>
+            <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <h5>Your Location: {location}</h5>
+                <h5>Your Password: {password}</h5>
+            </Popup>
         </div>
     );
 }

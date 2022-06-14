@@ -21,13 +21,13 @@ export const SidebarData = [
     path: '/save',
     icon: <FaIcons.FaLock />,
     cName: 'nav-text'
-  }/*,
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
-    cName: 'nav-text'
   },
+  {
+    title: 'Saved Passwords',
+    path: '/passwords',
+    icon: <IoIcons.IoMdCloud />,
+    cName: 'nav-text'
+  },/*
   {
     title: 'Messages',
     path: '/messages',
