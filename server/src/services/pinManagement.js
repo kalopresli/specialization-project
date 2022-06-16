@@ -10,40 +10,41 @@ const db = mysql.createConnection({
     database: 'PasswordManager',
 })
 
-export default async function generatePin(length, location) {
+export default async function generatePin(length, location, userid) {
     const pin = {
         pin: gpc(length),
-        location: location
+        location: location,
+        userid: userid
     }
-    console.log(pin);
     return pin;
 }
 
-export async function saveGenPin(length, location) {
+export async function saveGenPin(length, location, userid) {
     const pin = {
         pin: gpc(length),
-        location: location
+        location: location,
+        userid: userid
     }
-    db.query("INSERT INTO pins (pin, location) VALUES (?,?)", 
-    [pin.pin, pin.location],
-    (err, res) => {
-        if (err) {console.log(err);}
-        else {console.log(pin.location);};
-    });
-    
+    db.query("INSERT INTO pins (pin, location, userid) VALUES (?,?,?)",
+        [pin.pin, pin.location, userid],
+        (err, res) => {
+            if (err) { console.log(err); }
+            else { console.log(pin.location); };
+        });
     return pin;
 }
 
-export async function savePersPin(pin, location) {
+export async function savePersPin(pin, location, userid) {
     const pinObj = {
         pin: pin,
-        location: location
+        location: location,
+        userid: userid
     }
-    db.query("INSERT INTO pins (pin, location) VALUES (?,?)", 
-    [pinObj.pin, pinObj.location],
-    (err, res) => {
-        if (err) {console.log(err);}
-        else {console.log(pinObj.location);};
-    });
+    db.query("INSERT INTO pins (pin, location, userid) VALUES (?,?,?)",
+        [pinObj.pin, pinObj.location, userid],
+        (err, res) => {
+            if (err) { console.log(err); }
+            else { console.log(pinObj.location); };
+        });
 }
 

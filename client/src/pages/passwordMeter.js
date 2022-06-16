@@ -1,6 +1,7 @@
 import { useState } from "react";
 //import PasswordStrengthMeter from "./components/passwordStrengthMeter";
 import PasswordStrengthMeter from "../components/passwordStrengthMeter";
+import jwt_decode from 'jwt-decode'
 
 function PasswordMeterPage() {
 

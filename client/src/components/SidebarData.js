@@ -2,18 +2,21 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import * as GiIcons from 'react-icons/gi';
+
+
 
 export const SidebarData = [
   {
-    title: 'Home',
+    title: 'Password Test',
     path: '/',
-    icon: <AiIcons.AiFillHome />,
+    icon: <AiIcons.AiOutlineSecurityScan />,
     cName: 'nav-text'
   },
   {
     title: 'Generate Password',
     path: '/create',
-    icon: <IoIcons.IoMdCodeWorking />,
+    icon: <GiIcons.GiGears />,
     cName: 'nav-text'
   },
   {
@@ -23,21 +26,29 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Generate Pin',
+    path: '/generatepin',
+    icon: <GiIcons.GiGears />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Saved Passwords',
     path: '/passwords',
     icon: <IoIcons.IoMdCloud />,
     cName: 'nav-text'
-  },/*
+  },
+
   {
-    title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    title: 'Saved PINs',
+    path: '/pins',
+    icon: <IoIcons.IoMdCode />,
     cName: 'nav-text'
   },
+
   {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
+    title: 'Logout',
+    path: '/logout',
+    icon: <FaIcons.FaSignOutAlt />,
     cName: 'nav-text'
-  }*/
+  }
 ];

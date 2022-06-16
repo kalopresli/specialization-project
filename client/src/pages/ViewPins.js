@@ -8,12 +8,12 @@ import jwt_decode from 'jwt-decode';
 
 
 
-function ViewPasswordsPage() {
+function ViewPinsPage() {
     //const [password, setPassword] = useState("");
     //const [location, setlocation] = useState("");
     const [passwordList, setPasswordList] = useState([]);
     const [userId, setUserId] = useState();
-    const url = 'http://localhost:4040/password/';
+    const url = 'http://localhost:4040/pin/';
     //let passwordList = []
 
 
@@ -60,10 +60,7 @@ function ViewPasswordsPage() {
                                         <Card.Title style={{ "color": "#060b26", "textAlign": "center" }}>{password.location}</Card.Title>
                                         <Card.Link style={{ "textAlign": "center" }} href={'https://www.' + password.location}>{password.location}</Card.Link>
                                         <Card.Text>
-                                            Password<br />{password.password}
-                                        </Card.Text>
-                                        <Card.Text>
-                                            Username<br />{password.username}
+                                            Password<br />{password.pin}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -77,4 +74,4 @@ function ViewPasswordsPage() {
     )
 }
 
-export default ViewPasswordsPage;
+export default ViewPinsPage;

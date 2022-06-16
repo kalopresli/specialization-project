@@ -6,40 +6,37 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 import Navbar from "./components/Navbar";
 import AddPasswordPage from "./pages/AddPassword";
 import ViewPasswordsPage from "./pages/ViewPasswords";
+import Login from "./pages/Login";
+import useToken from './components/useToken';
+import Logout from "./pages/Logout";
+import GeneratePincode from "generate-pincode";
+import GeneratePin from "./pages/GeneratePin";
+import ViewPinsPage from "./pages/ViewPins";
 
 function App() {
 
+  const { token, setToken } = useToken();
+  
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
+
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<PasswordMeterPage />} />
         <Route exact path="/create" element={<PasswordManagerPage />} />
         <Route exact path="/save" element={<AddPasswordPage />} />
         <Route exact path="/passwords" element={<ViewPasswordsPage />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/logout" element={<Logout />} />
+        <Route exact path="/generatepin" element={<GeneratePin />} />
+        <Route exact path="/pins" element={<ViewPinsPage />} />
+
       </Routes>
     </div>
   )
-
-  //const [password, setPassword] = useState('');
-  //console.log(password);
-
-  /*return (
-    <div className="container">
-      <div className="col-md-6 mx-auto ">
-        <h3 className="text-center my-5">Password Strength Meter</h3>
-        <div className="form-group mb-1">
-          <input
-            type="password"
-            className="form-control shadow-none"
-            placeholder="Password"
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
-        <PasswordStrengthMeter password={password} />
-      </div>
-    </div>
-  );*/
 }
 
 export default App;
