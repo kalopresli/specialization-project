@@ -49,11 +49,11 @@ function ViewPasswordsPage() {
             height: '100%'
         }}>
             <div>
-                <Row xl={4} className="g-3">
+                <Row xl={5} className="g-3">
                     {
                         passwordList.map((password) => (
 
-                            <Col md={{ span: 3, offset: 1 }} >
+                            <Col md={{ span: 5, offset: 1 }} >
                                 <Card style={{ width: `${1050 / 4}px` }}>
                                     <Card.Img variant="top" />
                                     <Card.Body>

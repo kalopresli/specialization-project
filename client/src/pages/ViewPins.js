@@ -54,13 +54,13 @@ function ViewPinsPage() {
                         passwordList.map((password) => (
 
                             <Col md={{ span: 3, offset: 1 }} >
-                                <Card style={{ width: `${1050 / 4}px` }}>
+                                <Card style={{ width: `${1050 / 5}px` }}>
                                     <Card.Img variant="top" />
                                     <Card.Body>
                                         <Card.Title style={{ "color": "#060b26", "textAlign": "center" }}>{password.location}</Card.Title>
-                                        <Card.Link style={{ "textAlign": "center" }} href={'https://www.' + password.location}>{password.location}</Card.Link>
-                                        <Card.Text>
-                                            Password<br />{password.pin}
+                                        <br/>
+                                        <Card.Text style={{"textAlign":"center"}}>
+                                            PIN<br />{password.pin}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
